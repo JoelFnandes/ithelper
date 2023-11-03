@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ithelper/ui/authentication/login.dart';
-import 'package:ithelper/ui/home.dart';
-
-import 'ui/navbar.dart';
+import 'package:ithelper/screens/authentication/login.dart';
+import 'package:ithelper/screens/home.dart';
 
 void main() {
-  runApp(MaterialApp(
-      title: "Contador de pessoas",
-      home: Login(),
-      theme: ThemeData.dark(useMaterial3: true)));
+  runApp(MaterialApp(home: Login(), theme: ThemeData.dark(useMaterial3: true)));
 }
