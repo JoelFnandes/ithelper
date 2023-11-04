@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ithelper/authContext.dart';
 import 'package:ithelper/controller/loginController.dart';
+import 'package:ithelper/models/user.dart';
 import 'package:ithelper/screens/authentication/register.dart';
 import 'package:ithelper/screens/home.dart';
 import 'package:ithelper/service/authService.dart';
@@ -12,7 +14,19 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  LoginController loginController = LoginController(AuthService());
+  late LoginController loginController;
+  final authService = AuthService();
+  final authContext = AuthContext(
+      isAuthenticated:
+          false, // Você pode definir o status de autenticação como falso no início
+      child: Login());
+
+  @override
+  void initState() {
+    super.initState();
+    loginController = LoginController(authService, authContext);
+  }
+
   bool _isObscure = true;
   String Msg = "";
 

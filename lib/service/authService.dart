@@ -16,14 +16,32 @@ class AuthService {
       body: jsonEncode({'login': username, 'password': password}),
     );
 
+    // Autenticação bem-sucedida
     if (response.statusCode == 200) {
-      // Autenticação bem-sucedida
       final String token = response.body; // O token é o corpo da resposta
+
       return token;
     } else {
       // Autenticação falhou, trate o erro
-      String error = "Usuário não existe";
-      throw Exception({response.reasonPhrase, error});
+      throw Exception({response.reasonPhrase, "Usuário não existe"});
+    }
+  }
+
+  Future<String?> getUserData(String username, String token) async {
+    final url = Uri.parse(baseUrl + "/users/" + username);
+
+    final response = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception({response.reasonPhrase, "Dados não encontrados"});
     }
   }
 }

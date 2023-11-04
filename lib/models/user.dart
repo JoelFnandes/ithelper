@@ -1,43 +1,47 @@
 class User {
-  final String id;
-  final String fullName;
+  final int id;
+  final String nomeCompleto;
   final String email;
-  final DateTime dateOfBirth;
-  final String username;
+  final DateTime dataNascimento;
+  final String nomeUsuario;
+  final String tipoUsuario;
 
   User({
     required this.id,
-    required this.fullName,
+    required this.nomeCompleto,
     required this.email,
-    required this.dateOfBirth,
-    required this.username,
+    required this.dataNascimento,
+    required this.nomeUsuario,
+    required this.tipoUsuario,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'fullName': fullName,
+      'nomeCompleto': nomeCompleto,
       'email': email,
-      'dateOfBirth': dateOfBirth.toIso8601String(),
-      'username': username,
+      'dataNascimento': dataNascimento.toIso8601String(),
+      'nomeUsuario': nomeUsuario,
+      'tipoUsuario': tipoUsuario,
     };
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
-      fullName: json['fullName'],
+      nomeCompleto: json['nomeCompleto'],
       email: json['email'],
-      dateOfBirth: DateTime.parse(json['dateOfBirth']),
-      username: json['username'],
+      dataNascimento: DateTime.parse(json['dataNascimento']),
+      nomeUsuario: json['nomeUsuario'],
+      tipoUsuario: json['tipoUsuario'],
     );
   }
 
   bool isValid() {
-    return id.isNotEmpty &&
-        fullName.isNotEmpty &&
+    return nomeCompleto.isNotEmpty &&
         email.isNotEmpty &&
-        dateOfBirth != null &&
-        username.isNotEmpty;
+        dataNascimento != null &&
+        nomeUsuario.isNotEmpty &&
+        tipoUsuario.isNotEmpty;
   }
 }
