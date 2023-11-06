@@ -1,24 +1,16 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ithelper/models/user.dart';
+import 'package:ithelper/screens/homes/homeTec.dart';
 
-class AuthContext extends InheritedWidget {
-  final bool isAuthenticated;
-  final User? user; // Tornar o usuário opcional
+class AuthContext with ChangeNotifier {
+  bool isAuthenticated = false;
+  User? user;
 
-  AuthContext({
-    required Widget child,
-    required this.isAuthenticated,
-    this.user, // Tornar o usuário opcional
-  }) : super(child: child);
-
-  static AuthContext of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AuthContext>()!;
+  void updateUser(User user) {
+    this.user = user;
+    isAuthenticated = true;
+    notifyListeners();
+    print(this.user?.nomeUsuario);
   }
-
-  @override
-  bool updateShouldNotify(covariant AuthContext oldWidget) {
-    return isAuthenticated != oldWidget.isAuthenticated;
-  }
-
-  void updateUser(User user) {}
 }

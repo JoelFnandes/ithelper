@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ithelper/screens/authentication/login.dart';
+import 'package:ithelper/screens/homes/homeUser.dart';
 
 /// Flutter code sample for [NavigationBar].
 
@@ -22,21 +24,33 @@ class _NavigationExampleState extends State<NavigationExample> {
       onDestinationSelected: (int index) {
         setState(() {
           currentPageIndex = index;
+          print(index);
         });
+        switch (index) {
+          case 3:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Login()),
+            );
+        }
       },
       destinations: const <Widget>[
         NavigationDestination(
-          icon: Icon(Icons.explore),
-          label: 'Explore',
+          icon: Icon(Icons.house),
+          label: 'Início',
         ),
         NavigationDestination(
-          icon: Icon(Icons.commute),
-          label: 'Commute',
+          icon: Icon(Icons.folder),
+          label: 'Chamados',
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.bookmark),
-          icon: Icon(Icons.bookmark_border),
-          label: 'Saved',
+          icon: Icon(Icons.notification_important),
+          label: 'Notificações',
+        ),
+        NavigationDestination(
+          selectedIcon: Icon(Icons.person),
+          icon: Icon(Icons.person),
+          label: 'Perfil',
         ),
       ],
     );

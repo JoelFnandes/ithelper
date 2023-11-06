@@ -10,28 +10,28 @@ class LoginController {
 
   LoginController(this.authService, this.authContext);
 
-  Future<bool> login(String username, String password) async {
+  Future<AuthContext?> login(String username, String password) async {
     try {
       final token = await authService.authenticate(username, password);
       if (token != null) {
         // Autenticação bem-sucedida
 
-        // Obtenha os detalhes do usuário após a autenticação
+        // Obtem os detalhes do usuário após a autenticação
         final user = await fetchUserData(username,
             token); // Substitua pela função que busca os detalhes do usuário
 
-        // Agora, atualize o AuthContext com os detalhes do usuário
+        // atualiza o AuthContext com os detalhes do usuário
         authContext?.updateUser(user);
 
-        return true;
+        return authContext;
       } else {
         // Token nulo, autenticação falhou
-        return false;
+        return null;
       }
     } catch (e) {
       //exceção que possa ocorrer durante a autenticação
       print('Erro durante a autenticação: $e');
-      return false;
+      return null;
     }
   }
 

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ithelper/models/user.dart';
 import 'package:ithelper/authContext.dart';
 import 'package:ithelper/screens/authentication/login.dart';
-import 'package:ithelper/screens/home.dart';
+import 'package:provider/provider.dart'; // Importe o pacote provider
 
 void main() {
   runApp(
-    AuthContext(
-      // Defina o status de autenticação
-      isAuthenticated: false,
+    ChangeNotifierProvider(
+      create: (context) => AuthContext(), // Crie uma instância de AuthContext
       child: MaterialApp(
         home: Login(),
         theme: ThemeData.dark(useMaterial3: true),

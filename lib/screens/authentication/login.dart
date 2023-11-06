@@ -3,7 +3,8 @@ import 'package:ithelper/authContext.dart';
 import 'package:ithelper/controller/loginController.dart';
 import 'package:ithelper/models/user.dart';
 import 'package:ithelper/screens/authentication/register.dart';
-import 'package:ithelper/screens/home.dart';
+import 'package:ithelper/screens/homes/homeTec.dart';
+import 'package:ithelper/screens/homes/homeUser.dart';
 import 'package:ithelper/service/authService.dart';
 
 class Login extends StatefulWidget {
@@ -16,10 +17,7 @@ class _LoginState extends State<Login> {
   final passwordController = TextEditingController();
   late LoginController loginController;
   final authService = AuthService();
-  final authContext = AuthContext(
-      isAuthenticated:
-          false, // Você pode definir o status de autenticação como falso no início
-      child: Login());
+  final authContext = AuthContext();
 
   @override
   void initState() {
@@ -115,15 +113,30 @@ class _LoginState extends State<Login> {
                             final username = usernameController.text;
                             final password = passwordController.text;
 
-                            bool loggedIn =
+                            // Se a autenticação for bem-sucedida ele vai retornar o User
+                            AuthContext? loggedIn =
                                 await loginController.login(username, password);
 
-                            if (loggedIn) {
-                              // Se a autenticação for bem-sucedida, navegue para a tela Home
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home()),
-                              );
+                            //Verifica se o que foi retornado pro "loggedIn" não é nulo e navega pra Home passando o User
+                            if (loggedIn != null) {
+                              switch (loggedIn.user?.tipoUsuario) {
+                                case "T":
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeTec(
+                                              authContext: loggedIn,
+                                            )),
+                                  );
+                                case "U":
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeUser(
+                                              authContext: loggedIn,
+                                            )),
+                                  );
+                              }
                             } else {
                               setState(() {
                                 Msg = "Usuário ou senha incorreta";
