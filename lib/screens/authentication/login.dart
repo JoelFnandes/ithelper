@@ -6,6 +6,7 @@ import 'package:ithelper/screens/authentication/register.dart';
 import 'package:ithelper/screens/homes/homeTec.dart';
 import 'package:ithelper/screens/homes/homeUser.dart';
 import 'package:ithelper/service/authService.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,15 +16,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  late LoginController loginController;
   final authService = AuthService();
   final authContext = AuthContext();
-
-  @override
-  void initState() {
-    super.initState();
-    loginController = LoginController(authService, authContext);
-  }
+  final loginController = LoginController();
 
   bool _isObscure = true;
   String Msg = "";
@@ -114,27 +109,25 @@ class _LoginState extends State<Login> {
                             final password = passwordController.text;
 
                             // Se a autenticação for bem-sucedida ele vai retornar o User
-                            AuthContext? loggedIn =
+                            User? loggedIn =
                                 await loginController.login(username, password);
 
                             //Verifica se o que foi retornado pro "loggedIn" não é nulo e navega pra Home passando o User
                             if (loggedIn != null) {
-                              switch (loggedIn.user?.tipoUsuario) {
-                                case "T":
+                              Provider.of<AuthContext>(context, listen: false)
+                                  .updateUser(loggedIn);
+                              switch (loggedIn.tipoUsuario) {
+                                case 0:
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeTec(
-                                              authContext: loggedIn,
-                                            )),
+                                        builder: (context) => HomeUser()),
                                   );
-                                case "U":
+                                case 1:
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeUser(
-                                              authContext: loggedIn,
-                                            )),
+                                        builder: (context) => HomeTec()),
                                   );
                               }
                             } else {

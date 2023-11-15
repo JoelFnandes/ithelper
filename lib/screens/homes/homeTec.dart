@@ -3,11 +3,13 @@ import 'package:ithelper/authContext.dart';
 import 'package:ithelper/models/user.dart';
 import 'package:ithelper/screens/authentication/login.dart';
 import 'package:ithelper/widgets/navbar.dart';
+import 'package:ithelper/widgets/ticketCard.dart';
 import 'package:provider/provider.dart'; // Importe o provider
 
 class HomeTec extends StatelessWidget {
-  final AuthContext authContext;
-  const HomeTec({Key? key, required this.authContext}) : super(key: key);
+  const HomeTec({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,8 @@ class HomeTec extends StatelessWidget {
                         width: 50, // Largura do contador
                         height: 50, // Altura do contador
                         child: Badge.count(
-                          count: 25,
-                          textColor: Color(0xFF141218),
-                          textStyle: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          backgroundColor: Color(0xFFD0BCFF),
-                        ),
+                            count: 25,
+                            textStyle: Theme.of(context).textTheme.titleLarge),
                       ),
                       SizedBox(width: 15), // Espaço entre o contador e o texto
                       Text(
@@ -111,20 +109,24 @@ class HomeTec extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ))),
             ]),
-            Text(
-              "Bem-vindo, ${authContext.user?.nomeUsuario}",
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            FilledButton.tonal(
-              child: const Text("Login"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-            ),
+            TicketCard("Sala 5", "Danilo", 3),
+            TicketCard("Sala 5", "Danilo", 3),
+            TicketCard("Sala 5", "Danilo", 3),
+            TicketCard("Sala 5", "Danilo", 3),
+            // Text(
+            //   "Bem-vindo, ${authContext.user?.nomeUsuario}",
+            //   style: TextStyle(fontSize: 20),
+            // ),
+            // SizedBox(height: 10),
+            // FilledButton.tonal(
+            //   child: const Text("Login"),
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => Login()),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

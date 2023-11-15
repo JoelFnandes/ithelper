@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ithelper/models/user.dart';
-import 'package:ithelper/screens/homes/homeTec.dart';
 
 class AuthContext with ChangeNotifier {
   bool isAuthenticated = false;
@@ -12,5 +11,11 @@ class AuthContext with ChangeNotifier {
     isAuthenticated = true;
     notifyListeners();
     print(this.user?.nomeUsuario);
+  }
+
+  void logout() {
+    user = null;
+    isAuthenticated = false;
+    notifyListeners();
   }
 }

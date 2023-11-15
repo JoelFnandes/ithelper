@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ithelper/authContext.dart';
 import 'package:ithelper/screens/authentication/login.dart';
 import 'package:ithelper/screens/homes/homeUser.dart';
+import 'package:provider/provider.dart';
 
 /// Flutter code sample for [NavigationBar].
 
@@ -17,7 +19,38 @@ class _NavigationExampleState extends State<NavigationExample> {
       NavigationDestinationLabelBehavior.alwaysShow;
 
   @override
-  Widget build(BuildContext context) {
+  NavigationBar build(BuildContext context) {
+    // Lista de destinos padrão (sempre inclui Início e Notificações)
+    int? userType = context.read<AuthContext>().user?.tipoUsuario;
+
+    print(userType);
+    List<NavigationDestination> destinations = [];
+    destinations.add(
+      NavigationDestination(
+        icon: Icon(Icons.house),
+        label: 'Início',
+      ),
+    );
+    // Adiciona Chamados à lista de destinos se o tipo de usuário for tecnico
+    if (userType != 0) {
+      destinations.add(
+        NavigationDestination(
+          icon: Icon(Icons.folder),
+          label: 'Chamados',
+        ),
+      );
+    }
+    destinations.add(NavigationDestination(
+      icon: Icon(Icons.notification_important),
+      label: 'Notificações',
+    ));
+    destinations.add(
+      NavigationDestination(
+        selectedIcon: Icon(Icons.person),
+        icon: Icon(Icons.person),
+        label: 'Perfil',
+      ),
+    );
     return NavigationBar(
       labelBehavior: labelBehavior,
       selectedIndex: currentPageIndex,
@@ -26,33 +59,25 @@ class _NavigationExampleState extends State<NavigationExample> {
           currentPageIndex = index;
           print(index);
         });
-        switch (index) {
-          case 3:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-            );
+        if (destinations.length > 3) {
+          switch (index) {
+            case 3:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+          }
+        } else {
+          switch (index) {
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+          }
         }
       },
-      destinations: const <Widget>[
-        NavigationDestination(
-          icon: Icon(Icons.house),
-          label: 'Início',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.folder),
-          label: 'Chamados',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.notification_important),
-          label: 'Notificações',
-        ),
-        NavigationDestination(
-          selectedIcon: Icon(Icons.person),
-          icon: Icon(Icons.person),
-          label: 'Perfil',
-        ),
-      ],
+      destinations: destinations,
     );
   }
 }

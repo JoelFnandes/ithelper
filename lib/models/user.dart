@@ -4,7 +4,7 @@ class User {
   final String email;
   final DateTime dataNascimento;
   final String nomeUsuario;
-  final String tipoUsuario;
+  final int tipoUsuario;
 
   User({
     required this.id,
@@ -42,6 +42,6 @@ class User {
         email.isNotEmpty &&
         dataNascimento != null &&
         nomeUsuario.isNotEmpty &&
-        tipoUsuario.isNotEmpty;
+        tipoUsuario != null;
   }
 }

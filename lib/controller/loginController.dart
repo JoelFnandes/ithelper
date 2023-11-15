@@ -5,12 +5,11 @@ import 'package:ithelper/service/authService.dart';
 import 'package:ithelper/authContext.dart';
 
 class LoginController {
-  final AuthService authService;
-  final AuthContext? authContext;
+  final authService = AuthService();
 
-  LoginController(this.authService, this.authContext);
+  LoginController();
 
-  Future<AuthContext?> login(String username, String password) async {
+  Future<User?> login(String username, String password) async {
     try {
       final token = await authService.authenticate(username, password);
       if (token != null) {
@@ -21,9 +20,8 @@ class LoginController {
             token); // Substitua pela função que busca os detalhes do usuário
 
         // atualiza o AuthContext com os detalhes do usuário
-        authContext?.updateUser(user);
 
-        return authContext;
+        return user;
       } else {
         // Token nulo, autenticação falhou
         return null;

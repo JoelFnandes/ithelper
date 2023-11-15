@@ -3,11 +3,11 @@ import 'package:ithelper/authContext.dart';
 import 'package:ithelper/models/user.dart';
 import 'package:ithelper/screens/authentication/login.dart';
 import 'package:ithelper/widgets/navbar.dart';
-import 'package:provider/provider.dart'; // Importe o provider
+import 'package:provider/provider.dart';
+import 'package:ithelper/widgets/ticketCard.dart';
 
 class HomeUser extends StatelessWidget {
-  final AuthContext authContext;
-  const HomeUser({Key? key, required this.authContext}) : super(key: key);
+  const HomeUser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,20 +71,24 @@ class HomeUser extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ))),
             ]),
-            Text(
-              "Bem-vindo, ${authContext.user?.nomeUsuario}",
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            FilledButton.tonal(
-              child: const Text("Login"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-            ),
+
+            TicketCard("Sala 5", "Danilo", 3),
+            TicketCard("Sala 5", "Danilo", 3),
+
+            // Text(
+            //   "Bem-vindo, ${authContext.user?.nomeUsuario}",
+            //   style: TextStyle(fontSize: 20),
+            // ),
+            // SizedBox(height: 10),
+            // FilledButton.tonal(
+            //   child: const Text("Login"),
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => Login()),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

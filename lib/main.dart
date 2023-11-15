@@ -7,10 +7,18 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => AuthContext(), // Crie uma instância de AuthContext
-      child: MaterialApp(
-        home: Login(),
-        theme: ThemeData.dark(useMaterial3: true),
-      ),
+      child:
+          MyApp(), // Use a classe MyApp como o widget principal do seu aplicativo
     ),
   );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Login(), // Substitua pelo widget inicial do seu aplicativo
+      theme: ThemeData.dark(useMaterial3: true),
+    );
+  }
 }
