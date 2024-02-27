@@ -4,7 +4,7 @@ class User {
   final String email;
   final DateTime dataNascimento;
   final String nomeUsuario;
-  final int tipoUsuario;
+  final String tipoUsuario;
 
   User({
     required this.id,

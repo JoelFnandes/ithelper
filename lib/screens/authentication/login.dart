@@ -110,20 +110,20 @@ class _LoginState extends State<Login> {
 
                             // Se a autenticação for bem-sucedida ele vai retornar o User
                             User? loggedIn =
-                                await loginController.login(username, password);
+                                await loginController.login(context ,username, password);
 
                             //Verifica se o que foi retornado pro "loggedIn" não é nulo e navega pra Home passando o User
                             if (loggedIn != null) {
                               Provider.of<AuthContext>(context, listen: false)
                                   .updateUser(loggedIn);
                               switch (loggedIn.tipoUsuario) {
-                                case 0:
+                                case "U":
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => HomeUser()),
                                   );
-                                case 1:
+                                case "T":
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

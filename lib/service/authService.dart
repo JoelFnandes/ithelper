@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class AuthService {
   final String baseUrl =
-      "http://192.168.1.7:8080"; // Use o endereço IP da sua máquina host
+      "http://192.168.1.9:8080"; // Usar o endereço IP da sua máquina host
 
   Future<String?> authenticate(String username, String password) async {
     final url = Uri.parse(baseUrl + "/login");
@@ -44,4 +44,6 @@ class AuthService {
       throw Exception({response.reasonPhrase, "Dados não encontrados"});
     }
   }
+
+  
 }

@@ -72,8 +72,7 @@ class HomeUser extends StatelessWidget {
                       ))),
             ]),
 
-            TicketCard("Sala 5", "Danilo", 3),
-            TicketCard("Sala 5", "Danilo", 3),
+            
 
             // Text(
             //   "Bem-vindo, ${authContext.user?.nomeUsuario}",

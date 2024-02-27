@@ -1,14 +1,23 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ithelper/authContext.dart';
+import 'package:ithelper/data/ticketData.dart';
 import 'package:ithelper/screens/authentication/login.dart';
-import 'package:provider/provider.dart'; // Importe o pacote provider
+import 'package:provider/provider.dart';
+
 
 void main() {
+  // Defina a codificação padrão para UTF-8
+  stdout.encoding = Encoding.getByName('utf-8')!;
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AuthContext(), // Crie uma instância de AuthContext
-      child:
-          MyApp(), // Use a classe MyApp como o widget principal do seu aplicativo
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthContext()),
+        ChangeNotifierProvider(create: (context) => TicketData()), // Adicione o TicketData ao provedor
+      ],
+      child: MyApp(),
     ),
   );
 }
@@ -17,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Login(), // Substitua pelo widget inicial do seu aplicativo
+      home: Login(),
       theme: ThemeData.dark(useMaterial3: true),
     );
   }
