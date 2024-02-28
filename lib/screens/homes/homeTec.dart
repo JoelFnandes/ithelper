@@ -7,9 +7,6 @@ import 'package:ithelper/widgets/ticketCard.dart';
 import 'package:ithelper/data/ticketData.dart'; // Importe a classe TicketData
 import 'package:provider/provider.dart'; // Importe o provider
 
-
-
-
 class HomeTec extends StatelessWidget {
   const HomeTec({
     Key? key,
@@ -129,8 +126,8 @@ class HomeTec extends StatelessWidget {
                 // Agora, use a lista de tickets de ticketData
                 for (var ticket in ticketData.getOpenTickets())
                   TicketCard(
-                  ticket.descricaoChamado,
-                    ticket.statusChamado,
+                    ticket.descricaoChamado,
+                    ticket.nomeDepartamento,
                     ticket.prioridade,
                   ),
               ],

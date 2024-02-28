@@ -7,7 +7,6 @@ import 'package:ithelper/data/ticketData.dart';
 import 'package:ithelper/screens/authentication/login.dart';
 import 'package:provider/provider.dart';
 
-
 void main() {
   // Defina a codificação padrão para UTF-8
   stdout.encoding = Encoding.getByName('utf-8')!;
@@ -15,7 +14,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthContext()),
-        ChangeNotifierProvider(create: (context) => TicketData()), // Adicione o TicketData ao provedor
+        ChangeNotifierProvider(
+            create: (context) =>
+                TicketData()), // Adicione o TicketData ao provedor
       ],
       child: MyApp(),
     ),

@@ -18,17 +18,19 @@ class TicketData with ChangeNotifier {
   }
 
   // Retorna todos os tickets pendentes
-List<TicketModel> getOpenTickets() {
-  print("Lista de tickets antes do filtro: $ticketData");
-  print("getOpenTickets() chamado");
-  List<TicketModel> openTickets =
-      ticketData.where((ticket) => ticket.statusChamado == 'P').toList();
-  print("Tickets pendentes antes de retornar: $openTickets");
-  return openTickets;
-}
+  List<TicketModel> getOpenTickets() {
+    print("Lista de tickets antes do filtro: $ticketData");
+    print("getOpenTickets() chamado");
+    List<TicketModel> openTickets =
+        ticketData.where((ticket) => ticket.statusChamado == 'P').toList();
+    print("Tickets pendentes antes de retornar: $openTickets");
+    return openTickets;
+  }
 
   // Retorna todos os tickets criados pelo usuário comum (Funcionario)
-  List<TicketModel> getTicketsFuncio(int idFun) {
-    return ticketData.where((ticket) => ticket.idFuncionario == idFun).toList();
+  List<TicketModel> getTicketsFuncio(String nomeUser) {
+    return ticketData
+        .where((ticket) => ticket.nomeUsuario == nomeUser)
+        .toList();
   }
 }
