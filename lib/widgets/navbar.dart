@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ithelper/authContext.dart';
 import 'package:ithelper/screens/authentication/login.dart';
-import 'package:ithelper/screens/homes/homeUser.dart';
 import 'package:provider/provider.dart';
-
-/// Flutter code sample for [NavigationBar].
 
 class NavigationExample extends StatefulWidget {
   const NavigationExample({super.key});

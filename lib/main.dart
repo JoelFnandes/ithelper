@@ -14,9 +14,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthContext()),
-        ChangeNotifierProvider(
-            create: (context) =>
-                TicketData()), // Adicione o TicketData ao provedor
+        ChangeNotifierProvider(create: (context) => TicketData()),
       ],
       child: MyApp(),
     ),

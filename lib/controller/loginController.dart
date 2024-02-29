@@ -15,9 +15,8 @@ class LoginController {
 
   LoginController();
 
-  Future<User?> login(BuildContext context, String username, String password) async {
-    
-
+  Future<User?> login(
+      BuildContext context, String username, String password) async {
     try {
       final token = await authService.authenticate(username, password);
       if (token != null) {
@@ -69,11 +68,9 @@ class LoginController {
       final ticketsDataGet = await ticketService.getTicketsData(user, token);
 
       if (ticketsDataGet != null) {
-        
         // Converter as strings em objetos TicketModel
-        List<TicketModel> ticketsModels = ticketsDataGet
-            .map((data) => TicketModel.fromJson(data))
-            .toList();
+        List<TicketModel> ticketsModels =
+            ticketsDataGet.map((data) => TicketModel.fromJson(data)).toList();
 
         print('Dados dos tickets decodificados: $ticketsModels');
         // Adicionar os tickets à instância única da classe TicketData

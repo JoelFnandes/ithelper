@@ -3,6 +3,7 @@ import 'dart:convert';
 class TicketModel {
   final int id;
   final String nomeUsuario;
+  final String tituloChamado;
   final String descricaoChamado;
   final DateTime dataHoraAbertura;
   final String prioridade;
@@ -13,6 +14,7 @@ class TicketModel {
   TicketModel(
       {required this.id,
       required this.nomeUsuario,
+      required this.tituloChamado,
       required this.descricaoChamado,
       required this.dataHoraAbertura,
       required this.prioridade,
@@ -24,6 +26,7 @@ class TicketModel {
     return {
       'idChamado': id, // Alterado para 'idChamado'
       'nomeUsuario': nomeUsuario,
+      'tituloChamado': tituloChamado,
       'descricaoChamado': descricaoChamado,
       'dataHoraAbertura': dataHoraAbertura.toIso8601String(),
       'prioridade': prioridade,
@@ -37,6 +40,7 @@ class TicketModel {
     return TicketModel(
         id: json['idChamado'] ?? 0, // Alterado para 'idChamado'
         nomeUsuario: json['nomeUsuario'] ?? '',
+        tituloChamado: json['tituloChamado'] ?? '',
         descricaoChamado: json['descricaoChamado'] ?? '',
         dataHoraAbertura: json['dataHoraAbertura'] != null
             ? DateTime.parse(json['dataHoraAbertura'])
@@ -55,6 +59,7 @@ class TicketModel {
     return TicketModel(
         id: decodedJson['idChamado'] ?? 0,
         nomeUsuario: decodedJson['nomeUsuario'] ?? '',
+        tituloChamado: decodedJson['tituloChamado'] ?? '',
         descricaoChamado: decodedJson['descricaoChamado'] ?? '',
         dataHoraAbertura: decodedJson['dataHoraAbertura'] != null
             ? DateTime.parse(decodedJson['dataHoraAbertura'])
@@ -68,7 +73,8 @@ class TicketModel {
   }
 
   bool isValid() {
-    return descricaoChamado.isNotEmpty &&
+    return tituloChamado.isNotEmpty &&
+        descricaoChamado.isNotEmpty &&
         dataHoraAbertura != null &&
         prioridade.isNotEmpty &&
         statusChamado.isNotEmpty &&

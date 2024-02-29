@@ -122,14 +122,9 @@ class HomeTec extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                // Agora, use a lista de tickets de ticketData
                 for (var ticket in ticketData.getOpenTickets())
-                  TicketCard(
-                    ticket.descricaoChamado,
-                    ticket.nomeDepartamento,
-                    ticket.prioridade,
-                  ),
+                  TicketCard(ticket.tituloChamado, ticket.nomeDepartamento,
+                      ticket.statusChamado, ticket.prioridade),
               ],
             );
           },

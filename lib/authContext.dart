@@ -18,4 +18,8 @@ class AuthContext with ChangeNotifier {
     isAuthenticated = false;
     notifyListeners();
   }
+
+  String? getNomeUser() {
+    return user?.nomeUsuario;
+  }
 }

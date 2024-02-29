@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ithelper/authContext.dart';
 import 'package:ithelper/models/ticketModel.dart';
+import 'package:provider/provider.dart';
 
 class TicketData with ChangeNotifier {
   List<TicketModel> ticketData = [];
@@ -28,9 +30,13 @@ class TicketData with ChangeNotifier {
   }
 
   // Retorna todos os tickets criados pelo usuário comum (Funcionario)
-  List<TicketModel> getTicketsFuncio(String nomeUser) {
-    return ticketData
-        .where((ticket) => ticket.nomeUsuario == nomeUser)
+  List<TicketModel> getTicketsFuncio(BuildContext context) {
+    AuthContext authContext = Provider.of(context, listen: false);
+
+    List<TicketModel> vincuTickets = ticketData
+        .where((ticket) => ticket.nomeUsuario == authContext.user?.id)
         .toList();
+
+    return vincuTickets;
   }
 }
