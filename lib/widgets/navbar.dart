@@ -20,7 +20,7 @@ class _NavigationExampleState extends State<NavigationExample> {
   @override
   NavigationBar build(BuildContext context) {
     // Lista de destinos padrão (sempre inclui Início e Notificações)
-    String? userType = context.read<AuthContext>().user?.tipoUsuario;
+    String? userType = context.read<AuthContext>().getTipoUser();
 
     print(userType);
     List<NavigationDestination> destinations = [];

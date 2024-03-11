@@ -22,9 +22,6 @@ void main() {
   );
 }
 
- // Defina seu próprio esquema de cores personalizado
-
-
 
 class MyApp extends StatelessWidget {
   @override

@@ -21,12 +21,12 @@ class LoginController {
       final token = await authService.authenticate(username, password);
       if (token != null) {
         // Autenticação bem-sucedida
-
+        
         // Obtem os detalhes do usuário após a autenticação
         final user = await fetchUserData(context, username,
             token); // Substitua pela função que busca os detalhes do usuário
 
-        // Obtem os chamados vinculados ou não ao usuário após a autenticação(depende se ele é Tecnico ou não)
+        // Obtem os chamados vinculados ao usuario(se ele for tecnico pega todos em aberto)
         fetchTicketsData(context, user, token);
 
         return user;
@@ -42,8 +42,6 @@ class LoginController {
   }
 
   fetchUserData(BuildContext context, String username, String token) async {
-    final ticketData = Provider.of<TicketData>(context, listen: false);
-
     try {
       final userData = await authService.getUserData(username, token);
 

@@ -34,7 +34,7 @@ class TicketData with ChangeNotifier {
     AuthContext authContext = Provider.of(context, listen: false);
 
     List<TicketModel> vincuTickets = ticketData
-        .where((ticket) => ticket.nomeUsuario == authContext.user?.nomeUsuario)
+        .where((ticket) => ticket.nomeUsuario == authContext.getNomeUser())
         .toList();
 
     return vincuTickets;
