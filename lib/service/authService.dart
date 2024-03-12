@@ -9,8 +9,6 @@ class AuthService {
 
   final FlutterSecureStorage _storage = FlutterSecureStorage();
 
-  
-
   Future<String?> authenticate(String username, String password) async {
     final url = Uri.parse(baseUrl + "/login");
 

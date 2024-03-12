@@ -9,7 +9,7 @@ import 'package:ithelper/data/ticketData.dart'; // Importe a classe TicketData
 import 'package:provider/provider.dart'; // Importe o provider
 
 class HomeTec extends StatelessWidget {
-  const HomeTec({
+  const HomeTec(BuildContext context, {
     Key? key,
   }) : super(key: key);
 
@@ -20,7 +20,7 @@ class HomeTec extends StatelessWidget {
       body: Center(
         child: Consumer<TicketData>(
           builder: (context, ticketData, child) {
-            print("Tickets abertos: ${ticketData.getOpenTickets()}");
+            //print("Tickets abertos: ${ticketData.getOpenTickets()}");
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -131,7 +131,7 @@ class HomeTec extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: NavigationExample(),
+      bottomNavigationBar: NavigationExample(context),
     );
   }
 }

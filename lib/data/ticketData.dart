@@ -14,18 +14,18 @@ class TicketData with ChangeNotifier {
 
   // Adiciona uma lista de tickets à lista existente
   void addListTickets(List<TicketModel> tickets) {
-    print("addListTickets chamada com a seguinte lista: $tickets");
+    //print("addListTickets chamada com a seguinte lista: $tickets");
     ticketData.addAll(tickets);
     notifyListeners(); // Notifica os ouvintes sobre a mudança nos dados
   }
 
   // Retorna todos os tickets pendentes
   List<TicketModel> getOpenTickets() {
-    print("Lista de tickets antes do filtro: $ticketData");
-    print("getOpenTickets() chamado");
+    //print("Lista de tickets antes do filtro: $ticketData");
+    //print("getOpenTickets() chamado");
     List<TicketModel> openTickets =
         ticketData.where((ticket) => ticket.statusChamado == 'P').toList();
-    print("Tickets pendentes antes de retornar: $openTickets");
+    //print("Tickets pendentes antes de retornar: $openTickets");
     return openTickets;
   }
 

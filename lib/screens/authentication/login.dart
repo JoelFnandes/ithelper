@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeTec()),
+                                        builder: (context) => HomeTec(context)),
                                   );
                               }
                             } else {

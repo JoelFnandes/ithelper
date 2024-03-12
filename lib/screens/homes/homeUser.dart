@@ -83,7 +83,7 @@ class HomeUser extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: NavigationExample(),
+      bottomNavigationBar: NavigationExample(context),
     );
   }
 }
