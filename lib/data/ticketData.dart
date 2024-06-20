@@ -40,7 +40,7 @@ class TicketData with ChangeNotifier {
     return vincuTickets;
   }
 
-  void clearData(){
+  void clearData() {
     ticketData.clear();
     notifyListeners();
   }

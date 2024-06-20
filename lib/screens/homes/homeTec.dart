@@ -9,12 +9,13 @@ import 'package:ithelper/data/ticketData.dart'; // Importe a classe TicketData
 import 'package:provider/provider.dart'; // Importe o provider
 
 class HomeTec extends StatelessWidget {
-  const HomeTec(BuildContext context, {
+  const HomeTec({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> teste = ["", ""];
     return Scaffold(
       backgroundColor: Color(0xFF141218),
       body: Center(
@@ -124,8 +125,16 @@ class HomeTec extends StatelessWidget {
                   ],
                 ),
                 for (var ticket in ticketData.getOpenTickets())
-                  TicketCard(ticket.tituloChamado, ticket.nomeDepartamento,
-                      ticket.statusChamado, ticket.prioridade),
+                  TicketCard(
+                      ticket.tituloChamado,
+                      ticket.nomeDepartamento,
+                      ticket.statusChamado,
+                      ticket.prioridade,
+                      ticket.nomeUsuario,
+                      "Tecnico",
+                      ticket.dataHoraAbertura,
+                      ticket.descricaoChamado,
+                      teste),
               ],
             );
           },

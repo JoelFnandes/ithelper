@@ -109,8 +109,8 @@ class _LoginState extends State<Login> {
                             final password = passwordController.text;
 
                             // Se a autenticação for bem-sucedida ele vai retornar o User
-                            User? loggedIn =
-                                await loginController.login(context ,username, password);
+                            User? loggedIn = await loginController.login(
+                                context, username, password);
 
                             //Verifica se o que foi retornado pro "loggedIn" não é nulo e navega pra Home passando o User
                             if (loggedIn != null) {
@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeTec(context)),
+                                        builder: (context) => HomeTec()),
                                   );
                               }
                             } else {

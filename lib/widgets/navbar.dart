@@ -7,7 +7,7 @@ import 'package:ithelper/screens/menus/MenuUser.dart';
 import 'package:provider/provider.dart';
 
 class NavigationExample extends StatefulWidget {
-  const NavigationExample(BuildContext context,{super.key});
+  const NavigationExample(BuildContext context, {super.key});
 
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
@@ -18,9 +18,10 @@ class _NavigationExampleState extends State<NavigationExample> {
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
 
-   final GlobalKey<_NavigationExampleState> navigationBarKey = GlobalKey<_NavigationExampleState>();
+  final GlobalKey<_NavigationExampleState> navigationBarKey =
+      GlobalKey<_NavigationExampleState>();
   @override
-  NavigationBar build(BuildContext context)  {
+  NavigationBar build(BuildContext context) {
     // Lista de destinos padrão (sempre inclui Início e Notificações)
     String? userType = context.read<AuthContext>().getTipoUser();
 
@@ -64,34 +65,26 @@ class _NavigationExampleState extends State<NavigationExample> {
         if (destinations.length > 3) {
           switch (index) {
             case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomeTec(context)),
-              );
+              // Navegue para a tela de início
+              Navigator.pushNamed(context, '/homeTec');
+              break;
             case 3:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MenuTec()),
-              );
+              // Navegue para o menu do usuário técnico
+              Navigator.pushNamed(context, '/menuTec');
+              break;
           }
         } else {
           switch (index) {
             case 2:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MenuUser()),
-              );
+              Navigator.pushNamed(context, '/menuUser');
           }
-          
         }
-        
       },
-      
       destinations: destinations,
     );
   }
 
-  void setCurrentPage(int current){
+  void setCurrentPage(int current) {
     currentPageIndex = current;
   }
 }

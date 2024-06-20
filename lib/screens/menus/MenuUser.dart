@@ -29,9 +29,15 @@ class _MenuUserState extends State<MenuUser> {
               child: Row(children: [
                 Container(
                   padding: EdgeInsets.fromLTRB(10, 20, 30, 20),
-                  child: const CircleAvatar(radius: 40, backgroundImage: NetworkImage("https://s2.glbimg.com/NO_M4iaJsCFNGREcDgjwuyXQ5f8=/smart/e.glbimg.com/og/ed/f/original/2019/07/24/wesley_snipes_blade.jpg"),),
+                  child: const CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage(
+                        "https://s2.glbimg.com/NO_M4iaJsCFNGREcDgjwuyXQ5f8=/smart/e.glbimg.com/og/ed/f/original/2019/07/24/wesley_snipes_blade.jpg"),
+                  ),
                 ),
-                Text(nomeUser!, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).colorScheme.surface)), 
+                Text(nomeUser!,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.surface)),
               ])),
           ListTile(
             title: Text(
@@ -74,5 +80,5 @@ class _MenuUserState extends State<MenuUser> {
         ],
       ),
     );
-}
+  }
 }

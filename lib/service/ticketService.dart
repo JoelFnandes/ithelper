@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:ithelper/models/ticketModel.dart';
 import 'package:ithelper/models/user.dart';
 
 class TicketService {
-  final String baseUrl = "http://192.168.1.9:8080";
+  final String baseUrl = "http://192.168.1.2:8080";
 
   Future<List<Map<String, dynamic>>?> getTicketsData(
       User user, String token) async {
@@ -37,6 +38,26 @@ class TicketService {
     } else {
       throw Exception(
           'Dados não encontrados. Motivo: ${response.reasonPhrase}');
+    }
+  }
+
+  Future<void> sendNewTicket(TicketModel ticket, String token) async {
+    final url = Uri.parse('$baseUrl/chamados/criarChamado');
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: json.encode(ticket.toJson()),
+    );
+
+    if (response.statusCode == 201) {
+      print('Ticket criado com sucesso');
+    } else {
+      throw Exception(
+          'Erro ao criar o ticket. Motivo: ${response.reasonPhrase}');
     }
   }
 }

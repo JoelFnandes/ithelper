@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:ithelper/models/employee.dart';
+import 'package:ithelper/service/employeeService.dart';
 import 'package:provider/provider.dart';
 import 'package:ithelper/data/ticketData.dart';
 import 'package:ithelper/models/ticketModel.dart';
@@ -12,20 +14,29 @@ import 'package:ithelper/service/ticketService.dart';
 class LoginController {
   final authService = AuthService();
   final ticketService = TicketService();
+  final employeeService = EmployeeService();
 
   LoginController();
 
   Future<User?> login(
       BuildContext context, String username, String password) async {
+    final authContext = Provider.of<AuthContext>(context, listen: false);
     try {
       final token = await authService.authenticate(username, password);
       if (token != null) {
         // Autenticação bem-sucedida
-        
+
         // Obtem os detalhes do usuário após a autenticação
         final user = await fetchUserData(context, username,
             token); // Substitua pela função que busca os detalhes do usuário
+        if (user != null) {
+          final employee =
+              await employeeService.fetchEmployeeByUserId(user.id, token);
 
+          if (employee != null) {
+            authContext.setFuncionario = employee;
+          }
+        }
         // Obtem os chamados vinculados ao usuario(se ele for tecnico pega todos em aberto)
         fetchTicketsData(context, user, token);
 

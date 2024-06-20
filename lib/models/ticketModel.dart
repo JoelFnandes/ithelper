@@ -1,75 +1,80 @@
 import 'dart:convert';
 
 class TicketModel {
-  final int id;
+  final int idChamado;
   final String nomeUsuario;
   final String tituloChamado;
   final String descricaoChamado;
   final DateTime dataHoraAbertura;
   final String prioridade;
   final String statusChamado;
-  final DateTime dataHoraFechamento;
+  final DateTime? dataHoraFechamento; // Allow null
   final String nomeDepartamento;
+  final int idFuncionario;
 
-  TicketModel(
-      {required this.id,
-      required this.nomeUsuario,
-      required this.tituloChamado,
-      required this.descricaoChamado,
-      required this.dataHoraAbertura,
-      required this.prioridade,
-      required this.statusChamado,
-      required this.dataHoraFechamento,
-      required this.nomeDepartamento});
+  TicketModel({
+    required this.idChamado,
+    required this.nomeUsuario,
+    required this.tituloChamado,
+    required this.descricaoChamado,
+    required this.dataHoraAbertura,
+    required this.prioridade,
+    required this.statusChamado,
+    this.dataHoraFechamento, // Allow null
+    required this.nomeDepartamento,
+    required this.idFuncionario,
+  });
 
   Map<String, dynamic> toJson() {
     return {
-      'idChamado': id, // Alterado para 'idChamado'
+      'idChamado': idChamado,
       'nomeUsuario': nomeUsuario,
       'tituloChamado': tituloChamado,
       'descricaoChamado': descricaoChamado,
       'dataHoraAbertura': dataHoraAbertura.toIso8601String(),
       'prioridade': prioridade,
       'statusChamado': statusChamado,
-      'dataHoraFechamento': dataHoraFechamento.toIso8601String(),
-      'nomeDepartamento': nomeDepartamento
+      'dataHoraFechamento':
+          dataHoraFechamento?.toIso8601String(), // Handle null
+      'nomeDepartamento': nomeDepartamento,
+      'funcionario': {'idFuncionario': idFuncionario},
     };
   }
 
   factory TicketModel.fromJson(Map<String, dynamic> json) {
     return TicketModel(
-        id: json['idChamado'] ?? 0, // Alterado para 'idChamado'
-        nomeUsuario: json['nomeUsuario'] ?? '',
-        tituloChamado: json['tituloChamado'] ?? '',
-        descricaoChamado: json['descricaoChamado'] ?? '',
-        dataHoraAbertura: json['dataHoraAbertura'] != null
-            ? DateTime.parse(json['dataHoraAbertura'])
-            : DateTime.now(),
-        prioridade: json['prioridade'] ?? '',
-        statusChamado: json['statusChamado'] ?? '',
-        dataHoraFechamento: json['dataHoraFechamento'] != null
-            ? DateTime.parse(json['dataHoraFechamento'])
-            : DateTime.now(),
-        nomeDepartamento: json['nomeDepartamento'] ?? '');
+      idChamado: json['idChamado'] ?? 0,
+      nomeUsuario: json['nomeUsuario'] ?? '',
+      tituloChamado: json['tituloChamado'] ?? '',
+      descricaoChamado: json['descricaoChamado'] ?? '',
+      dataHoraAbertura: DateTime.parse(json['dataHoraAbertura']),
+      prioridade: json['prioridade'] ?? '',
+      statusChamado: json['statusChamado'] ?? '',
+      dataHoraFechamento: json['dataHoraFechamento'] != null
+          ? DateTime.parse(json['dataHoraFechamento'])
+          : null, // Handle null
+      nomeDepartamento: json['nomeDepartamento'] ?? '',
+      idFuncionario: json['funcionario']?['idFuncionario'] ?? 0,
+    );
   }
 
   factory TicketModel.fromJsonString(String jsonString) {
     final Map<String, dynamic> decodedJson = json.decode(jsonString);
 
     return TicketModel(
-        id: decodedJson['idChamado'] ?? 0,
-        nomeUsuario: decodedJson['nomeUsuario'] ?? '',
-        tituloChamado: decodedJson['tituloChamado'] ?? '',
-        descricaoChamado: decodedJson['descricaoChamado'] ?? '',
-        dataHoraAbertura: decodedJson['dataHoraAbertura'] != null
-            ? DateTime.parse(decodedJson['dataHoraAbertura'])
-            : DateTime.now(),
-        prioridade: decodedJson['prioridade'] ?? '',
-        statusChamado: decodedJson['statusChamado'] ?? '',
-        dataHoraFechamento: decodedJson['dataHoraFechamento'] != null
-            ? DateTime.parse(decodedJson['dataHoraFechamento'])
-            : DateTime.now(),
-        nomeDepartamento: decodedJson['nomeDepartamento'] ?? '');
+      idChamado: decodedJson['idChamado'] ?? 0,
+      nomeUsuario: decodedJson['nomeUsuario'] ?? '',
+      tituloChamado: decodedJson['tituloChamado'] ?? '',
+      descricaoChamado: decodedJson['descricaoChamado'] ?? '',
+      dataHoraAbertura: DateTime.parse(decodedJson['dataHoraAbertura']),
+      prioridade: decodedJson['prioridade'] ?? '',
+      statusChamado: decodedJson['statusChamado'] ?? '',
+      dataHoraFechamento: decodedJson['dataHoraFechamento'] != null
+          ? DateTime.parse(decodedJson['dataHoraFechamento'])
+          : null, // Handle null
+      nomeDepartamento: decodedJson['nomeDepartamento'] ?? '',
+      idFuncionario: decodedJson['funcionario']?['idFuncionario'] ?? 0,
+    );
   }
 
   bool isValid() {
@@ -77,7 +82,6 @@ class TicketModel {
         descricaoChamado.isNotEmpty &&
         dataHoraAbertura != null &&
         prioridade.isNotEmpty &&
-        statusChamado.isNotEmpty &&
-        dataHoraFechamento != null;
+        statusChamado.isNotEmpty;
   }
 }
